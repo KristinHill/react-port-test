@@ -54,7 +54,7 @@ const About = () => {
                     </div>
                 </div>
             </div>
-            <Loader type='pacman' />
+            <Loader type='ball-beat' style={{transform: 'scale(0.75)'}} />
         </>
     )
 }
