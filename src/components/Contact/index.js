@@ -1,17 +1,40 @@
 import './index.scss';
 import Loader from 'react-loaders';
 import AnimatedLetters from '../AnimatedLetters';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
+import emailjs from '@emailjs/browser';
 
 const Contact = () => {
     
     const [letterClass, setLetterClass] = useState('text-animate');
+    const refForm = useRef();
 
     useEffect(() => {
         setTimeout(() => {
             return setLetterClass('text-animate-hover')
         }, 3000)
     }, [])
+
+    const sendEmail = (e) => {
+        e.preventDefault()
+
+        emailjs
+        .sendForm (
+                'gmail',
+                'template_9hm35sm',
+                refForm.current,
+                'cYobHeb9CJzdGsPUS'
+            )
+        .then (
+            () => {
+                alert('Message seccessfully sent!')
+                window.location.reload(false)
+            },
+            () => {
+                alert('Failed to send message, please try again.')
+            }
+        )
+    }
 
     return (
         <>
@@ -28,7 +51,7 @@ const Contact = () => {
                         Lorem ipsum dolor sit amet, consectetur adipiscing elit.
                     </p>
                     <div className='contact-form'>
-                        <form>
+                        <form ref={refForm} onSubmit={sendEmail} >
                             <ul>
                                 <li className='half'>
                                     <input type='text' name='name' placeholder='Name' required />
@@ -36,7 +59,7 @@ const Contact = () => {
                                 <li className='half'>
                                     <input type='email' name='email' placeholder='Email' required />
                                 </li>
-                                <li>
+                                <li className='h'>
                                     <input type='text' name='subject' placeholder='Subject' required />
                                 </li>
                                 <li>
