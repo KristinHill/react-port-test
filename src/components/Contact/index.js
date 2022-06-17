@@ -59,7 +59,7 @@ const Contact = () => {
                                 <li className='half'>
                                     <input type='email' name='email' placeholder='Email' required />
                                 </li>
-                                <li className='h'>
+                                <li>
                                     <input type='text' name='subject' placeholder='Subject' required />
                                 </li>
                                 <li>
